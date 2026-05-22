@@ -2,31 +2,50 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ] # Make sure this matches your default branch name
-  workflow_dispatch:
+    branches: [main] # or master, depending on your default branch
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
+    name: Build Astro Site
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout project
         uses: actions/checkout@v4
-      - name: Install, build, and upload with Astro
-        uses: withastro/action@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm' # change to pnpm or yarn if you use those managers
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production files
+        run: npm run build
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist # Astro outputs production builds here by default
 
   deploy:
+    name: Deploy Live Site
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps: deployment.outputs.page_url }}
     steps:
-     - name: Deploy Astro site
-      uses: withastro/action@v3
-      with:
-        node-version: 22
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
