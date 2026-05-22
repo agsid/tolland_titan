@@ -3,13 +3,14 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
-import sitemap from '@astrojs/sitemap';
-
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+  base: '/tolland_titan/',
+  site: 'https://agsid.github.io/tolland_titan/',
   output: 'static',
-  integrations: [sitemap()]
+  trailingSlash: "always"
+
 });
