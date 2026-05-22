@@ -1,0 +1,38 @@
+{
+  "navLinks": [
+    { "label": "Home", "url": "/" },
+    { "label": "Members", "url": "/members" },
+    { "label": "Events", "url": "/events" },
+    { "label": "Contact", "url": "/contact" }
+  ],
+  "hero": {
+    "teamNumber": "23535 Tolland County Titans",
+    "badgeText": "1000+ Hours in Lab",
+    "badgeCta": "Join Team →",
+    "headline": "Tolland County Titans Robotics Team #23535",
+    "subheading": "We participate in the FIRST Tech Challenge by designing, building, and programming competitive mobile robots. Students develop mechanical design skills, write autonomous code, and run community outreach events.",
+    "primaryCtaText": "Join the Team",
+    "primaryCtaUrl": "/contact",
+    "secondaryCtaText": "View Robot Portfolio",
+    "secondaryCtaUrl": "/portfolio"
+  },
+  "metrics": [
+    { "value": "500+", "label": "CAD Hours" },
+    { "value": "20+", "label": "Team Members" },
+    { "value": "150+", "label": "Matches Competed" },
+    { "value": "15+", "label": "Team Sponsors" }
+  ],
+  "logistics": {
+    "grades": "Grades 6–10",
+    "locationName": "Tolland County Robotics Lab",
+    "address": "156 River Road, Willington CT",
+    "cost": "Free",
+    "seasonNote": "Year-Round (Peak: Sept – Feb)",
+    "schedule": [
+      { "days": "Wednesdays", "time": "6:00 PM – 9:00 PM" },
+      { "days": "Thursdays", "time": "6:00 PM – 9:00 PM" },
+      { "days": "Saturdays", "time": "1:30 PM – 6:30 PM" }
+    ],
+    "aboutText": "FIRST Tech Challenge teams design, build, program, and operate robots to compete in an annual head-to-head engineering challenge. Mentored by adults, students learn mechanical principles, software engineering, and project management. Each fall, a new game challenge is released, requiring teams to strategize, manufacture parts, and write code to compete against other clubs across Connecticut. Our members also manage community volunteer projects and demonstrations to share STEM concepts locally."
+  }
+}

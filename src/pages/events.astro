@@ -1,0 +1,168 @@
+---
+// src/pages/events.astro
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import eventData from "../data/events.json";
+import "../styles/global.css";
+
+const { heading, subheading, events } = eventData;
+
+// Sort events so upcoming ones appear first, or keep order from JSON
+const upcomingEvents = events.filter(e => e.status === "Upcoming" || e.status === "Scheduled");
+const pastEvents = events.filter(e => e.status === "Completed");
+---
+
+<Layout title="Team Timelines & Events | Tolland County Titans #23535">
+  <div class="relative min-h-screen w-full bg-brand-bg text-white flex flex-col items-center overflow-x-hidden pb-12 font-sans">
+    
+    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(15,118,110,0.15)_0%,rgba(2,44,34,1)_90%)]"></div>
+
+    <Navbar />
+
+    <main class="relative z-10 w-full max-w-5xl px-4 mt-8 md:mt-16 flex flex-col gap-12">
+      
+      <section class="text-left max-w-2xl">
+        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">Logistics Ledger</span>
+        <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
+          {heading}
+        </h1>
+        <p class="text-emerald-100/70 text-xs sm:text-sm leading-relaxed">
+          {subheading}
+        </p>
+      </section>
+
+      <div class="flex flex-col gap-16 w-full">
+        
+        {upcomingEvents.length > 0 && (
+          <section class="flex flex-col gap-6">
+            <div class="flex items-center gap-3 border-b border-emerald-800/60 pb-2">
+              <h2 class="text-lg font-bold uppercase tracking-wider text-amber-400">Upcoming Operations</h2>
+              <span class="flex h-2 w-2 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              </span>
+            </div>
+
+            <div class="flex flex-col gap-4 w-full">
+              {upcomingEvents.map((event) => {
+                const imagePath = `/images/events/${event.title.toLowerCase().replace(/[^a-z0-9]/g, "-")}.jpg`;
+                return (
+                  <div class="bg-brand-card border-2 border-emerald-700 p-6 rounded-2xl shadow-xl grid md:grid-cols-12 gap-6 items-center transition-all duration-300 hover:border-brand-accent group">
+                    
+                    <div class="md:col-span-4 aspect-video md:aspect-square rounded-xl overflow-hidden border border-emerald-900/80 bg-brand-bg relative shrink-0">
+                      <img 
+                        src={imagePath} 
+                        alt={event.title}
+                        loading="eager"
+                        class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        onerror="this.src='/images/events/default-thumbnail.jpg';"
+                      />
+                    </div>
+
+                    <div class="md:col-span-8 flex flex-col justify-between h-full py-1">
+                      <div>
+                        <div class="flex items-center gap-2 mb-2">
+                          <span class="bg-brand-bg border border-emerald-800 px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider text-brand-accent">
+                            {event.type}
+                          </span>
+                          <span class="text-[10px] font-mono text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                            {event.status}
+                          </span>
+                        </div>
+
+                        <h3 class="text-xl font-black text-white tracking-tight leading-snug group-hover:text-brand-accent transition-colors">
+                          {event.title}
+                        </h3>
+
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-emerald-300 font-semibold font-mono mt-2 mb-4">
+                          <span class="flex items-center gap-1">📅 {event.date}</span>
+                          <span class="flex items-center gap-1">📍 {event.location}</span>
+                        </div>
+
+                        <p class="text-emerald-100/80 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                          {event.description}
+                        </p>
+                      </div>
+
+                      <div class="mt-6 pt-4 border-t border-emerald-800/40 flex items-center justify-between">
+                        <a 
+                          href={event.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          class="inline-flex items-center justify-center text-xs font-bold tracking-wider uppercase text-brand-text-dark bg-brand-accent hover:bg-emerald-300 active:scale-95 px-5 py-2.5 rounded-xl transition-all shadow-md"
+                        >
+                          Sign Up / View Details 
+                        </a>
+                        <span class="text-[10px] font-mono text-emerald-600 hidden sm:inline">Active Registry Ledger</span>
+                      </div>
+                    </div>
+
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        <section class="flex flex-col gap-6">
+          <div class="border-b border-emerald-800/60 pb-2">
+            <h2 class="text-lg font-bold uppercase tracking-wider text-emerald-400/80">Completed Timeline Archive</h2>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            {pastEvents.map((event) => {
+              const imagePath = `/images/events/${event.title.toLowerCase().replace(/[^a-z0-9]/g, "-")}.jpg`;
+              return (
+                <div class="bg-brand-card/60 border border-emerald-800/60 p-5 rounded-xl shadow-lg flex flex-col justify-between opacity-85 hover:opacity-100 transition-all duration-200 group">
+                  <div>
+                    <div class="flex justify-between items-center mb-3">
+                      <span class="bg-brand-bg/40 border border-emerald-900 text-[9px] font-mono font-medium uppercase px-2 py-0.5 rounded text-emerald-400">
+                        {event.type}
+                      </span>
+                      <span class="text-[9px] font-mono text-emerald-500/80 uppercase font-bold">
+                        ✓ Archive
+                      </span>
+                    </div>
+
+                    <div class="w-full h-32 rounded-lg overflow-hidden border border-emerald-900/60 bg-brand-bg relative mb-3 opacity-60 mix-blend-luminosity group-hover:opacity-80 transition-opacity">
+                      <img 
+                        src={imagePath} 
+                        alt={event.title}
+                        loading="lazy"
+                        class="absolute inset-0 w-full h-full object-cover"
+                        onerror="this.src='/images/events/default-thumbnail.jpg';"
+                      />
+                    </div>
+
+                    <h3 class="text-base font-extrabold text-white/90 tracking-tight leading-snug group-hover:text-brand-accent transition-colors">
+                      {event.title}
+                    </h3>
+                    
+                    <p class="text-[11px] text-emerald-400/70 font-mono mt-1 mb-3">
+                      {event.date} • {event.location}
+                    </p>
+
+                    <p class="text-emerald-100/60 text-xs leading-relaxed line-clamp-2 border-t border-emerald-800/30 pt-2">
+                      {event.description}
+                    </p>
+                  </div>
+
+                  <div class="mt-4 pt-3 border-t border-emerald-800/20 flex items-center justify-between text-[10px] font-mono">
+                    <a href={event.url} class="text-emerald-400 hover:text-brand-accent transition-colors">Review Event Records →</a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+
+    <footer class="w-full text-center mt-auto pt-16 pb-4 text-[10px] tracking-widest text-emerald-500 uppercase">
+      © {new Date().getFullYear()} Tolland County Robotics Foundation
+    </footer>
+
+  </div>
+</Layout>

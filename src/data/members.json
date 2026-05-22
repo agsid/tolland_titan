@@ -1,0 +1,38 @@
+{
+  "heading": "Meet our team",
+  "subheading": "Students managing hardware, software, and designing robots .",
+  "groupPhoto": {
+    "src": "/images/titans2.jpg",
+    "alt": "Tolland County Titans #23535 Team Group Photograph"
+  },
+  "roster": [
+    {
+      "name": "Alex Smith",
+      "role": "Drive Team Lead",
+      "subteam": "Hardware & Manufacturing",
+      "image": "/images/members/alex-smith.jpg",
+      "bio": "Specializes in drivetrain geometry, custom gearbox assembly, and localized structural stress analysis under competition load profiles."
+    },
+    {
+      "name": "Sarah Jenkins",
+      "role": "Autonomous Systems Lead",
+      "subteam": "Software Engineering",
+      "image": "/images/members/sarah-jenkins.jpg",
+      "bio": "Develops vision tracking pipelines using OpenCV and optimizes pathing calculations utilizing dead-reckoning sensor arrays."
+    },
+    {
+      "name": "Michael Chang",
+      "role": "Chassis Technician",
+      "subteam": "Hardware & Manufacturing",
+      "image": "/images/members/michael-chang.jpg",
+      "bio": "Manages rapid prototyping workflows including 3D printing components and drafting part models inside corporate CAD environments."
+    },
+    {
+      "name": "Emily Rodriguez",
+      "role": "Operations Controller",
+      "subteam": "Logistics & Outreach",
+      "image": "", 
+      "bio": "Coordinates public engineering demonstrations, manages budget resource vectors, and structures documentation for the engineering portfolio."
+    }
+  ]
+}

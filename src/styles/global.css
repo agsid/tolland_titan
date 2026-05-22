@@ -1,0 +1,56 @@
+/* src/styles/global.css */
+@import "tailwindcss";
+
+@theme {
+  /* Brand Palette Definition */
+  --color-brand-bg: #064e3b;           /* Dark Green Background (Emerald 900) */
+  --color-brand-card: #5D8F5F;         /* Medium Dark Green Card Surface */
+  --color-brand-card-light: #115e59;   /* Lighter Accent Card Surface */
+  --color-brand-text-dark: #022c22;    /* Dark Contrast Text */
+  --color-brand-accent: #34d399;       /* Vibrant Mint Accent Text */
+  
+  /* Smooth UI Animations */
+  --animate-spin-slow: spin 3s linear infinite;
+}
+
+/* Base Document Configuration */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-brand-bg);
+    color: #ffffff; /* White text for optimal contrast on dark green background */
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Global Selection Highlighter */
+  ::selection {
+    background-color: var(--color-brand-accent);
+    color: var(--color-brand-text-dark);
+  }
+}
+
+/* Custom Component Layout Overrides */
+@layer components {
+  /* Minimalist Scrollbar Track Configuration */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-brand-card);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brand-card-light);
+  }
+}

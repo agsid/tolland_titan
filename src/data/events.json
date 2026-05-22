@@ -1,0 +1,33 @@
+{
+  "heading": "Team Timelines & Events",
+  "subheading": "Tracking our active competitive schedule, mechanical inspection benchmarks, and community STEM outreach demonstrations.",
+  "events": [
+    {
+      "title": "Tolland County Robotics Rumble",
+      "type": "Joint Competition",
+      "date": "January 31st, 2026",
+      "location": "Vernon Center Middle School",
+      "status": "Completed",
+      "description": "A joint FTC Qualifying Event and Off-Season FLL Challenge Event running from 8:00 AM to 4:30 PM. Information focused on the FLL Off-Season track (refer to FIRST Event Web for separate FTC parameters). Logistical questions routed to ymacary@tcrobotics.org.",
+      "url": "https://www.tcrobotics.org/events/tcrr"
+    },
+    {
+      "title": "Aerospace Adventure LEGO Tournament",
+      "type": "Outreach & Exhibition",
+      "date": "Saturday, March 28th, 2026",
+      "location": "New England Air Museum",
+      "status": "Completed",
+      "description": "Open and free to all LEGO Robotics Teams. Features an FTC Robot Demo, Navy STEM Experience, core project reviewing blocks, and full access to explore the New England Air and Space Museum. Shift 1 (Grades K-1): 8:30 AM - 12:00 PM. Shift 2 (Grades 2-4): 1:00 PM - 4:30 PM. Inquiries managed via ymacary@tcrobotics.org.",
+      "url": "https://www.tcrobotics.org/events/aerospace-adventure"
+    },
+    {
+      "title": "Robotics After Dark (RAD)",
+      "type": "FTC Off-Season Event",
+      "date": "June 6th, 2026",
+      "location": "McHugh Hall, University of Connecticut",
+      "status": "Upcoming",
+      "description": "A specialized glow-in-the-dark FIRST Tech Challenge off-season event featuring dedicated field testing profiles. Registration cost parameters evaluate at $150 per competing team module.",
+      "url": "https://www.tcrobotics.org/events/rad"
+    }
+  ]
+}

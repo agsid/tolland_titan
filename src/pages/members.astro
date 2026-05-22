@@ -1,0 +1,89 @@
+---
+// src/pages/members.astro
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import memberData from "../data/members.json";
+import "../styles/global.css";
+
+const { heading, subheading, groupPhoto, roster } = memberData;
+---
+
+<Layout title="Team Roster & Modules | Tolland County Titans #23535">
+  <div class="relative min-h-screen w-full bg-brand-bg text-white flex flex-col items-center overflow-x-hidden pb-12 font-sans">
+    
+    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(15,118,110,0.15)_0%,rgba(2,44,34,1)_90%)]"></div>
+
+    <Navbar />
+
+    <div class="relative z-10 w-full max-w-6xl px-4 mt-8 md:mt-16 flex flex-col gap-12">
+      
+      <section class="w-full flex flex-col gap-6">
+        <div class="text-left max-w-2xl">
+        
+          <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
+            {heading}
+          </h1>
+          <p class="text-emerald-100/70 text-xs sm:text-sm leading-relaxed">
+            {subheading}
+          </p>
+        </div>
+
+        <div class="w-full border border-emerald-800 rounded-3xl overflow-hidden shadow-2xl h-64 sm:h-96 md:h-[650px] relative">
+          <img 
+            src={groupPhoto.src} 
+            alt={groupPhoto.alt}
+            loading="eager"
+            class="absolute inset-0 w-full h-full object-cover object-center select-none pointer-events-none mix-blend-luminosity transition-all duration-500 hover:opacity-100 hover:mix-blend-normal"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-bg/60 via-transparent to-transparent pointer-events-none"></div>
+        </div>
+      </section>
+
+      <main class="w-full">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+          {roster.map((member) => (
+            <div class="bg-brand-card border border-emerald-800 p-5 rounded-2xl shadow-xl flex flex-col justify-between transition-all duration-200 hover:border-emerald-700 group">
+              <div>
+                <div class="w-full aspect-square rounded-xl overflow-hidden border border-emerald-900 bg-brand-bg relative mb-4">
+                  <img 
+                    src={member.image || "/images/avatar-placeholder.png"} 
+                    alt={`Headshot of ${member.name}`}
+                    loading="lazy"
+                    decoding="async"
+                    class="absolute inset-0 w-full h-full object-cover object-center select-none pointer-events-none mix-blend-luminosity opacity-75 group-hover:scale-105 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-300"
+                  />
+                </div>
+
+                <span class="inline-block bg-brand-bg/60 border border-emerald-900/50 px-2.5 py-0.5 rounded-md text-[9px] font-mono font-bold tracking-wider uppercase text-brand-accent mb-3">
+                  {member.subteam}
+                </span>
+                
+                <h3 class="text-base font-extrabold text-white tracking-tight leading-tight group-hover:text-brand-accent transition-colors">
+                  {member.name}
+                </h3>
+                <p class="text-[11px] font-medium text-emerald-300 tracking-wide mt-0.5 mb-3">
+                  {member.role}
+                </p>
+                
+                <p class="text-emerald-100/70 text-xs leading-relaxed border-t border-emerald-800/40 pt-3">
+                  {member.bio}
+                </p>
+              </div>
+
+              <div class="mt-6 pt-3 border-t border-emerald-800/20 flex items-center justify-between text-[10px] text-emerald-500 font-mono">
+                <span>FTC Roster Module</span>
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity text-brand-accent">✓</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+
+    </div>
+
+    <footer class="w-full text-center mt-auto pt-16 pb-4 text-[10px] tracking-widest text-emerald-500 uppercase">
+      © {new Date().getFullYear()} Tolland County Robotics Foundation
+    </footer>
+
+  </div>
+</Layout>

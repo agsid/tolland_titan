@@ -1,0 +1,114 @@
+---
+// src/components/Navbar.astro
+import siteData from '../data/landing.json';
+const { navLinks, hero } = siteData;
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 w-full bg-white border-b border-neutral-900 font-sans tracking-tight select-none">
+  <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 relative">
+      
+      <div class="flex items-center h-full">
+        <a href="/" class="flex items-center gap-3 h-full border-r border-neutral-900 pr-6 group">
+         <img src="/logo-titan.png" alt="Tolland County Titans Team Logo" class="w-8 h-8 object-contain transition-transform duration-300 group-hover:rotate-6" />
+          <div class="flex flex-col justify-center">
+            <span class="text-[11px] font-black font-mono tracking-[0.2em] uppercase text-neutral-900 leading-none mb-0.5">
+              TITANS ROBOTICS
+            </span>
+           
+          </div>
+        </a>
+      </div>
+
+      <nav class="hidden md:flex items-center h-full absolute left-1/2 -translate-x-1/2">
+        <ul class="flex items-center h-full text-[11px] font-bold uppercase tracking-wider font-mono">
+          {navLinks.map((link) => {
+            const isActive = currentPath === link.url || (link.url !== '/' && currentPath.startsWith(link.url));
+            return (
+              <li class="h-full flex items-center">
+                <a 
+                  href={link.url} 
+                  class={`h-full px-6 flex items-center border-x border-transparent hover:border-neutral-200 hover:bg-neutral-50 text-neutral-900 transition-all relative group/link`}
+                >
+                  <span class="relative z-10">{link.label}</span>
+                  
+                  {/* Underline Indicator Strip matching Tiger's high-contrast styling */}
+                  <span class={`absolute bottom-0 left-0 w-full h-[2px] bg-neutral-900 transition-transform duration-200 origin-left ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover/link:scale-x-50'}`} />
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+
+
+        <button 
+          id="menu-trigger"
+          type="button"
+          class="p-2 -mr-2 text-neutral-900 hover:text-neutral-600 active:scale-95 transition-all md:hidden flex flex-col gap-1 justify-center items-end"
+          aria-label="Toggle system control menu navigation grid"
+        >
+          <span class="w-5 h-[1.5px] bg-neutral-900 rounded-full transition-transform duration-300" id="bar-top"></span>
+          <span class="w-3.5 h-[1.5px] bg-neutral-900 rounded-full transition-all duration-300" id="bar-mid"></span>
+          <span class="w-5 h-[1.5px] bg-neutral-900 rounded-full transition-transform duration-300" id="bar-bot"></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div 
+    id="mobile-drawer" 
+    class="fixed inset-x-0 top-16 bg-white border-b border-neutral-900 shadow-xl pointer-events-none opacity-0 translate-y-[-10px] transition-all duration-300 z-40 md:hidden font-mono"
+  >
+    <div class="px-4 pt-4 pb-6 space-y-1">
+      {navLinks.map((link) => {
+        const isActive = currentPath === link.url || (link.url !== '/' && currentPath.startsWith(link.url));
+        return (
+          <a
+            href={link.url}
+            class={`block px-4 py-3 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors ${isActive ? 'bg-neutral-950 text-white' : 'text-neutral-900 hover:bg-neutral-50'}`}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</header>
+
+<script>
+  // Setup standard state listeners to execute mobile tray deployment routines safely
+  const trigger = document.getElementById('menu-trigger');
+  const drawer = document.getElementById('mobile-drawer');
+  const barTop = document.getElementById('bar-top');
+  const barMid = document.getElementById('bar-mid');
+  const barBot = document.getElementById('bar-bot');
+
+  let isTrayOpen = false;
+
+  trigger?.addEventListener('click', () => {
+    isTrayOpen = !isTrayOpen;
+    
+    if (isTrayOpen) {
+      // Open state interactions
+      drawer?.classList.remove('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
+      drawer?.classList.add('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      
+      barTop?.classList.add('translate-y-[5.5px]', 'rotate-45');
+      barMid?.classList.add('opacity-0', 'translate-x-2');
+      barBot?.classList.add('translate-y-[-5.5px]', '-rotate-45');
+    } else {
+      // Close state interactions
+      drawer?.classList.remove('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      drawer?.classList.add('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
+      
+      barTop?.classList.remove('translate-y-[5.5px]', 'rotate-45');
+      barMid?.classList.remove('opacity-0', 'translate-x-2');
+      barBot?.classList.remove('translate-y-[-5.5px]', '-rotate-45');
+    }
+  });
+</script>
